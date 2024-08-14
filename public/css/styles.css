@@ -1,0 +1,127 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-bold';
+    src: url('../fonts/Roboto/Roboto-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open sans';
+    src: url('../fonts/Open_Sans/static/OpenSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open sans bold';
+    src: url('../fonts/Open_Sans/static/OpenSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'Serif';
+    src: url('../fonts/Serif/YoungSerif-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style:normal;
+}
+
+
+:root{
+    --fuente-principal: 'Open sans';
+    --fuente-secundaria: 'Roboto';
+    --fuente-aplicacion-titulo: 'Serif';
+}
+
+body{
+    font-family: var(--fuente-principal), sans-serif;
+
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: var(--fuente-secundaria), sans-serif;
+}
+
+.aplication-title{
+    font-family: var(--fuente-aplicacion-titulo), sans-serif ;
+}
+
+div.my-icon-green{
+    font-size: 25px;
+    color: #66bb6a;
+    animation:green-neon 2s infinite alternate;
+}
+
+div.my-icon-red{
+    font-size: 25px;
+    color: #ef5350;
+    animation:red-neon 2s infinite alternate;
+}
+
+div.my-icon-yellow{
+    font-size: 25px;
+    color: #ffee58;
+    animation: yellow-neon 2s infinite alternate;
+}
+
+div.icon i.fas{
+    font-size: 2rem !important;
+}
+
+/*
+    Animaciones
+*/
+@keyframes green-neon{
+    0%,  100%{
+        text-shadow: 0 0 0 #8ae48d,
+            0 0 0 #2aaf31,
+            0 0 0  #65ca6a;
+    }
+
+    10%, 30%, 60%{
+        color: #2e7d32;
+    }
+}
+
+@keyframes red-neon{
+    0%,  100%{
+        text-shadow: 0 0 0 #f56359,
+            0 0 0 #c74341,
+            0 0 0  #f05e5e;
+    }
+
+    10%, 30%, 60%{
+        color: #f51313;
+    }
+}
+
+@keyframes yellow-neon{
+    0%, 100%{
+        text-shadow: 0 0 0 #fae848,
+            0 0 0 #f8d435,
+            0 0 0 #ffe552;
+    }
+    10%, 30%, 60%{
+        color: #ffee00;
+    }
+}
+
+
+@keyframes azul-neon{
+    0%, 10%, 15%,20%,30%, 35%, 40%, 50%, 55%, 60%, 70%, 75%, 80%, 85%, 90%, 100% {
+        text-shadow: 0 0 0 #3485FF,
+        0 0 0 #00246C,
+        0 0 0 #00246C;
+    }
+
+    10%, 15%, 60%{
+        color: transparent;
+    }
+}

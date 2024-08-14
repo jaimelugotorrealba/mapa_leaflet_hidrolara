@@ -1,0 +1,22 @@
+.bg-gradient-gray{
+    background: rgb(242,245,247);
+    background: linear-gradient(228deg, rgba(242,245,247,1) 14%, rgba(158,171,189,1) 100%);
+}
+.bg-gradient-gray-nav{
+    background: rgb(242,245,247);
+    background: linear-gradient(131deg, rgba(242,245,247,1) 0%, rgba(215,221,228,1) 100%);
+}
+.h-screen-4rem{
+    height: calc(100vh - 4.1rem);
+}
+@media (min-height: 550px){
+    .h-min-screen-75{
+        height: 75vh;
+    }
+}
+@media (min-height: 550px ) and (min-width : 1279px){
+    .h-min-screen-75{
+        height: 55vh;
+    }
+}
+
