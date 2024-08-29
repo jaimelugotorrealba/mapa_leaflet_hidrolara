@@ -3,6 +3,7 @@
         <link rel="stylesheet" href="{{ asset('css/leaflet.css') }}">
     @endsection
     <div class="flex">
+        @if (isset(auth()->user()->userRole) && auth()->user()->userRole && (auth()->user()->userRole->role_id==1 || auth()->user()->userRole->role_id==2))
         <section class="hidden md:block md:w-2/5 p-3 ">
             <a href="{{ route('map.create') }}"
             class="block m-6 mb-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center md:w-32">Crear</a>
@@ -59,6 +60,10 @@
             @endif
 
         </section>
+        @endif
+     
+
+      
 
         <section id="sectionMap" class="w-full h-screen-4rem z-0" wire:ignore>
             <div id="map" class="h-full"></div>

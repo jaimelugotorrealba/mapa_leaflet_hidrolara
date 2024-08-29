@@ -19,7 +19,7 @@
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                @if (auth()->user()->user_type_id == 1)
+                @if (isset(auth()->user()->userRole) && auth()->user()->userRole && auth()->user()->userRole->role_id==1)
                 <div>
                     <a href="{{route('administrator.index')}}" class="font-bold text-lg">{{__('Administrador')}}</a>
                 </div>
