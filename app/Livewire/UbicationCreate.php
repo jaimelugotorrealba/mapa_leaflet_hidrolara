@@ -14,6 +14,7 @@ class UbicationCreate extends Component
     public $municipalitySelected = null, $icons = null, $iconSelected = null, $iconImage = null, $details;
     public $latitude = null , $longitude =null ,$flow = null , $capacity = null ,$operability = null;
     public $statusDescription = null, $observation = null;
+    public $utmY,$utmX,$zone,$systems,$systemSelected,$code;
     public function mount(){
         if($this->operability){
             $this->municipalitySelected = $this->operability->municipality_id;
@@ -24,7 +25,12 @@ class UbicationCreate extends Component
             $this->latitude = $this->operability->latitude;
             $this->longitude = $this->operability->longitude;
             $this->flow = $this->operability->flow;
+            $this->utmY = $this->operability->utm_y;
+            $this->utmX = $this->operability->utm_x;
+            $this->zone = $this->operability->zone;
             $this->capacity = $this->operability->capacity;
+            $this->systemSelected = $this->operability->system_id;
+            $this->code = $this->operability->code;
             $this->operabilityTypeSelected = $this->operability->operability_type_id;
             $this->descriptionOperabilities = DB::table('description_operabilities')->where('operability_type_id','=',$this->operabilityTypeSelected)->get();
             $this->statusDescription = $this->operability->status_description;
@@ -32,6 +38,7 @@ class UbicationCreate extends Component
             $this->iconImage = DB::table('icons')->where('id', '=', $this->iconSelected)->first();
             $this->observation = $this->operability->observation;
         }
+        $this->systems = DB::table('systems')->get();
         $this->municipalities = DB::table('municipalities')->where('state_id','=',12)->get();
         $this->icons = DB::table('icons')->get();
         $this->operabilityTypes = DB::table('operability_types')->where('status','=','A')->get();
@@ -62,4 +69,6 @@ class UbicationCreate extends Component
     {
         return view('livewire.ubication-create');
     }
+
+
 }

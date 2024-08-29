@@ -2,11 +2,20 @@
     <fieldset class="border border-solid border-gray-300 p-3">
         <legend class="text-sm font-semibold">Datos</legend>
         <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div class="w-full md:w-1/2 px-3 py-2 mb-6 md:mb-0">
+                <x-label class="block text-gray-700 text-sm font-bold mb-2" for="code">
+                    {{ __('Código') }}
+                </x-label>
+                <x-input type="text" name="code" wire:model.live="code"
+                    class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="code" type="text" placeholder="Código" value="{{ old('code') }}" />
+
+            </div>
+            <div class="w-full md:w-1/2 px-3 py-2 mb-6 md:mb-0">
                 <x-label class="block text-gray-700 text-sm font-bold mb-2" for="municipalitySelected">
                     {{ __('Municipio') }}
                 </x-label>
-                <select name="municipalitySelected" class="w-full" id="municipalitySelected"
+                <select name="municipalitySelected" class="w-full rounded" id="municipalitySelected"
                     wire:model.live="municipalitySelected">
                     <option value="">{{ __('Seleccione') }}</option>
                     @foreach ($municipalities as $municipality)
@@ -15,11 +24,11 @@
                     @endforeach
                 </select>
             </div>
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div class="w-full md:w-1/2 px-3 py-2 mb-6 md:mb-0">
                 <x-label class="block text-gray-700 text-sm font-bold mb-2" for="parishesSelected">
                     {{ __('Parroquia') }}
                 </x-label>
-                <select name="parishesSelected" id="parishesSelected" class="w-full" wire:model.live="parishesSelected">
+                <select name="parishesSelected" id="parishesSelected" class="w-full rounded" wire:model.live="parishesSelected">
                     <option value="">{{ __('Seleccione') }}</option>
                     @if ($parishes)
                         @foreach ($parishes as $parish)
@@ -29,9 +38,21 @@
                     @endif
                 </select>
             </div>
-        </div>
-        <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div class="w-full md:w-1/2 px-3 py-2 mb-6 md:mb-0">
+                <x-label class="block text-gray-700 text-sm font-bold mb-2" for="system">
+                    {{ __('Sistema') }}
+                </x-label>
+                <select name="system" id="system" class="w-full rounded" wire:model.lazy="systemSelected" >
+                    <option value="">{{ __('Seleccione') }}</option>
+                    @if ($systems)
+                        @foreach ($systems as $system)
+                            <option value="{{ $system->id }}">{{ $system->description }}
+                            </option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+            <div class="w-full md:w-1/2 px-3 py-2 mb-6 md:mb-0">
                 <x-label class="block text-gray-700 text-sm font-bold mb-2" for="sector">
                     {{ __('Sector') }}
                 </x-label>
@@ -41,7 +62,7 @@
 
             </div>
 
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div class="w-full md:w-1/2 px-3 py-2 mb-6 md:mb-0">
                 <x-label class="block text-gray-700 text-sm font-bold mb-2" for="details">
                     {{ __('Nombre del lugar') }}
                 </x-label>
@@ -49,32 +70,38 @@
                     class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="details" type="text" placeholder="Ejemplo: Dos cerritos" value="{{ old('details') }}" />
             </div>
-        </div>
 
-        <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <x-label class="block text-gray-700 text-sm font-bold mb-2" for="latitude">
-                    {{ __('Latitud') }}
+            <div class="w-full md:w-1/2 px-3 py-2 mb-6 md:mb-0">
+                <x-label class="block text-gray-700 text-sm font-bold mb-2" for="utm_x">
+                    {{ __('Coordenada UTM X') }}
                 </x-label>
-                <x-input type="text" name="latitude" wire:model.live="latitude"
+                <x-input type="text" name="utm_x" wire:model.live="utmX"
                     class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="latitude" type="text" placeholder="Positivo para Norte y Este"
-                    value="{{ old('latitude') }}" />
+                    id="utm_x" type="text" placeholder="UTM X"
+                    value="{{ old('utm_x') }}" />
             </div>
 
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <x-label class="block text-gray-700 text-sm font-bold mb-2" for="longitude">
-                    {{ __('Longitud') }}
+            <div class="w-full md:w-1/2 px-3 py-2 mb-6 md:mb-0">
+                <x-label class="block text-gray-700 text-sm font-bold mb-2" for="utm_y">
+                    {{ __('Coordenada UTM Y') }}
                 </x-label>
-                <x-input type="text" name="longitude" wire:model.live="longitude"
+                <x-input type="text" name="utm_y" wire:model.live="utmY"
                     class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="longitude" type="text" placeholder="Negativo para Sur y Oeste"
-                    value="{{ old('longitude') }}" />
+                    id="utm_y" type="text" placeholder="UTM Y"
+                    value="{{ old('utm_y') }}" />
             </div>
-        </div>
 
-        <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div class="w-full md:w-1/2 px-3 py-2 mb-6 md:mb-0">
+                <x-label class="block text-gray-700 text-sm font-bold mb-2" for="zone">
+                    {{ __('Zona') }}
+                </x-label>
+                <x-input type="text" name="zone" wire:model.live="zone"
+                    class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="zone" type="text" placeholder="Zona"
+                    value="{{ old('zone') }}" />
+            </div>
+
+            <div class="w-full md:w-1/2 px-3 py-2 mb-6 md:mb-0">
                 <x-label class="block text-gray-700 text-sm font-bold mb-2" for="flow">
                     {{ __('Caudal') }}
                 </x-label>
@@ -83,22 +110,20 @@
                     id="flow" type="text" placeholder="En números" value="{{ old('flow') }}" />
             </div>
 
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div class="w-full md:w-1/2 px-3 py-2 mb-6 md:mb-0">
                 <x-label class="block text-gray-700 text-sm font-bold mb-2" for="capacity">
                     {{ __('Capacidad') }}
                 </x-label>
                 <x-input type="number" name="capacity" wire:model.live="capacity"
                     class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="capacity" type="number" placeholder="Capacidad instalada" value="{{ old('capacity') }}" />
+                    id="capacity" min="0" placeholder="Capacidad instalada" value="{{ old('capacity') }}" />
             </div>
-        </div>
 
-        <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div class="w-full md:w-1/2 px-3 py-2 mb-6 md:mb-0">
                 <x-label class="block text-gray-700 text-sm font-bold mb-2" for="status">
                     {{ __('Estatus') }}
                 </x-label>
-                <select name="status" class="w-full" id="status" wire:model.live='operabilityTypeSelected'>
+                <select name="status" class="w-full rounded" id="status" wire:model.live='operabilityTypeSelected'>
                     <option value="">{{ __('Seleccione') }}</option>
                     @foreach ($operabilityTypes as $operabilityType)
                         <option value="{{ $operabilityType->id }}">{{ $operabilityType->description }}</option>
@@ -106,10 +131,10 @@
                 </select>
             </div>
             @if ($operabilityTypeSelected)
-                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <div class="w-full md:w-1/2 px-3 py-2 mb-6 md:mb-0">
                     <x-label class="block text-gray-700 text-sm font-bold mb-2"
                         for="statusDescription">{{ __('Descripción') }}</x-label>
-                    <select class="w-full" name="statusDescription" id="statusDescription"
+                    <select class="w-full rounded" name="statusDescription" id="statusDescription"
                         wire:model.live="statusDescription">
                         @foreach ($descriptionOperabilities as $descriptionOperability)
                             <option>
