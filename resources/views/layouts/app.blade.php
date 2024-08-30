@@ -17,7 +17,7 @@
         <script src="{{asset('build/assets/app-dbe23e4c.js')}}"></script>
         <!-- Styles -->
         @livewireStyles
-        <link rel="stylesheet" href="{{asset('css/styles.css')}}">
+        <link rel="stylesheet" href="{{asset('css/styles4.css')}}">
         @yield('styles')
     </head>
     <body class="font-sans antialiased">
