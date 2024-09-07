@@ -21,7 +21,7 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @if (isset(auth()->user()->userRole) && auth()->user()->userRole && auth()->user()->userRole->role_id==1)
                 <div>
-                    <a href="{{route('administrator.index')}}" class="font-bold text-lg">{{__('Administrador')}}</a>
+                    <a href="{{route('admin.index')}}" class="font-bold text-lg">{{__('Administrador')}}</a>
                 </div>
                 @endif
                 <!-- Teams Dropdown -->

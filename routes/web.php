@@ -27,6 +27,15 @@ use Illuminate\Support\Facades\Route;
 //         return view('dashboard');
 //     })->name('dashboard');
 // });
+route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function(){
+    route::get('/',function(){
+        return view('admin.index');
+    })->name('admin.index');
+    Route::get('/create', [MapController::class, 'index'])->middleware('auth')->name('map.create');
+    Route::post('/create', [MapController::class, 'store'])->middleware('auth')->name('map.store');
+    Route::get('/create/{operability}',[MapController::class, 'edit'])->middleware('auth')->name('map.edit');
+    Route::post('/create/{operability}',[MapController::class, 'update'])->middleware('auth')->name('map.update');
+});
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/scsg/livewire/livewire.js', $handle);
 });
@@ -36,9 +45,9 @@ Livewire::setUpdateRoute(function ($handle) {
 Route::get('/register', function(){
     return redirect('login');
 });
+Route::get('welcome',function(){
+    return view('welcome');
+});
 Route::get('/', MapComponent::class)->middleware('auth')->name('dashboard');
-Route::get('/create', [MapController::class, 'index'])->middleware('auth')->name('map.create');
-Route::post('/create', [MapController::class, 'store'])->middleware('auth')->name('map.store');
-Route::get('/create/{operability}',[MapController::class, 'edit'])->middleware('auth')->name('map.edit');
-Route::post('/create/{operability}',[MapController::class, 'update'])->middleware('auth')->name('map.update');
+
 Route::get('administrator', AdministratorComponent::class)->middleware('administrator')->name('administrator.index');

@@ -14,7 +14,7 @@ class MapController extends Controller
 {
     public function index(){
         $operability = null;
-        return view('map.create')->with('operability', $operability);
+        return view('admin.ubication.create')->with('operability', $operability);
     }
 
     public function store(Request $request){
@@ -66,7 +66,7 @@ class MapController extends Controller
     }
 
     public function edit(Operability $operability){
-        return view('map.create')->with('operability',$operability);
+        return view('admin.ubication.create')->with('operability',$operability);
     }
 
     public function update(Operability $operability, Request $request){
@@ -122,20 +122,20 @@ class MapController extends Controller
         $utm_x = $utmRequest[0];
         $utm_y = $utmRequest[1];
         $zone = $utmRequest[2];
-    
+
         // Crear una instancia de Proj4php
         $proj4 = new Proj4php();
-    
+
         // Definir proyecciones UTM y geográficas
         $utm = new Proj('EPSG:326' . str_pad($zone, 2, '0', STR_PAD_LEFT), $proj4); // UTM zona norte
         $wgs84 = new Proj('EPSG:4326', $proj4); // WGS84
-    
+
         // Crear el punto UTM
         $point = new Point($utm_x, $utm_y);
-    
+
         // Transformar las coordenadas UTM a geográficas
         $geographicPoint = $proj4->transform($utm, $wgs84, $point); // Transformar usando el método correcto
-    
+
         // Retornar el resultado
         $result = [$geographicPoint->y, $geographicPoint->x];
         return $result;
