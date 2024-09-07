@@ -13,40 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $icons = Icon::all();
-        foreach($icons as $icon){
-            if($icon->description =='Bombillo'){
-                $icon->icon = '<span class="material-symbols-outlined">lightbulb</span>';
-            }
-            if($icon->description =='Agua'){
-                $icon->icon = '<span class="material-symbols-outlined">water</span>';
-            }
-            if($icon->description =='Camión'){
-                $icon->icon = '<span class="material-symbols-outlined">local_shipping</span>';
-            }
-            if($icon->description =='Edificio'){
-                $icon->icon = '<span class="material-symbols-outlined">apartment</span>';
-            }
-            if($icon->description =='Ubicación'){
-                $icon->icon = '<span class="material-symbols-outlined">location_on</span>';
-            }
-            if($icon->description =='Árbol'){
-                $icon->icon = '<span class="material-symbols-outlined">park</span>';
-            }
-            if($icon->description =='Círculo'){
-                $icon->icon = '<span class="material-symbols-outlined">circle</span>';
-            }
-            if($icon->description =='Neutro'){
-                $icon->icon = '<span class="material-symbols-outlined">fmd_bad</span>';
-            }
-            if($icon->description =='Triángulo'){
-                $icon->icon = '<span class="material-symbols-outlined">change_history</span>';
-            }
-            if($icon->description =='Cuadrado'){
-                $icon->icon = '<span class="material-symbols-outlined">crop_square</span>';
-            }
-            $icon->save();
-        }
+
         $newIcons = [
                 'Tubería' => '<span class="material-symbols-outlined">water_pump</span>',
                 'Válvula de Tubería' => '<span class="material-symbols-outlined">valve</span>',
