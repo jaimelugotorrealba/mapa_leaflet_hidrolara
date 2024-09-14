@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\MapController;
-use App\Livewire\AdministratorComponent;
 use App\Livewire\MapComponent;
 use App\Livewire\UbicationCreate;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MapController;
+use App\Livewire\AdministratorComponent;
+use App\Http\Controllers\LocationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,10 +32,11 @@ route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function(){
     route::get('/',function(){
         return view('admin.index');
     })->name('admin.index');
-    Route::get('/create', [MapController::class, 'index'])->middleware('auth')->name('map.create');
-    Route::post('/create', [MapController::class, 'store'])->middleware('auth')->name('map.store');
-    Route::get('/create/{operability}',[MapController::class, 'edit'])->middleware('auth')->name('map.edit');
-    Route::post('/create/{operability}',[MapController::class, 'update'])->middleware('auth')->name('map.update');
+    Route::get('/locations', [LocationController::class, 'index'])->middleware('auth')->name('location.index');
+    Route::get('/locations/create', [LocationController::class, 'create'])->middleware('auth')->name('location.create');
+    Route::post('/locations/create', [LocationController::class, 'store'])->middleware('auth')->name('location.store');
+    Route::get('/locations/create/{operability}',[LocationController::class, 'edit'])->middleware('auth')->name('location.edit');
+    Route::post('/locations/create/{operability}',[LocationController::class, 'update'])->middleware('auth')->name('location.update');
 });
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/scsg/livewire/livewire.js', $handle);
