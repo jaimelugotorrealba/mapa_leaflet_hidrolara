@@ -10,6 +10,10 @@
 
 @section('content')
     <div class="container p-1">
+       <div class="col-12 col-md-6 col-lg-2">
+        <a href="{{ route('operability.create') }}"
+        class="btn btn-primary m-6 mb-0 text-white font-weight-bold py-2 px-4 rounded text-center w-100">Crear</a>
+       </div>
         <div class="card">
         </div>
         <div class="card-body">
