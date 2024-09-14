@@ -13,7 +13,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <!-- Scripts -->
-        <link rel="stylesheet" href="{{asset('build/assets/app-3a3b1988.css')}}">
+        <link rel="stylesheet" href="{{asset('build/assets/app-e2f85f26.css')}}">
         <script src="{{asset('build/assets/app-dbe23e4c.js')}}"></script>
         <link rel="stylesheet" href="{{asset('css/styles.css')}}">
         <!-- Styles -->

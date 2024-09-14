@@ -28,16 +28,21 @@ use App\Http\Controllers\OperabilityController;
 //         return view('dashboard');
 //     })->name('dashboard');
 // });
-route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function(){
+route::group(['middleware' => ['auth','permission'], 'prefix' => 'admin'], function(){
     route::get('/',function(){
         return view('admin.index');
     })->name('admin.index');
-    Route::get('/operability', [OperabilityController::class, 'index'])->middleware('auth')->name('operability.index');
-    Route::get('/operability/create', [OperabilityController::class, 'create'])->middleware('auth')->name('operability.create');
-    Route::post('/operability/create', [OperabilityController::class, 'store'])->middleware('auth')->name('operability.store');
-    Route::get('/operability/create/{operability}',[OperabilityController::class, 'edit'])->middleware('auth')->name('operability.edit');
-    Route::post('/operability/create/{operability}',[OperabilityController::class, 'update'])->middleware('auth')->name('operability.update');
-    Route::post('/operability/delete/{operability}',[OperabilityController::class, 'destroy'])->middleware('auth')->name('operability.delete');
+    //operability
+        Route::get('/operability', [OperabilityController::class, 'index'])->middleware('administrator')->name('operability.index');
+        Route::get('/operability/create', [OperabilityController::class, 'create'])->middleware('administrator')->name('operability.create');
+        Route::post('/operability/create', [OperabilityController::class, 'store'])->middleware('administrator')->name('operability.store');
+        Route::get('/operability/create/{operability}',[OperabilityController::class, 'edit'])->middleware('administrator')->name('operability.edit');
+        Route::post('/operability/create/{operability}',[OperabilityController::class, 'update'])->middleware('administrator')->name('operability.update');
+        Route::post('/operability/delete/{operability}',[OperabilityController::class, 'destroy'])->middleware('administrator')->name('operability.delete');
+
+    Route::get('administrator', function(){
+        return view('admin.users.index');
+    })->middleware('administrator')->name('administrator.index');
 });
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/scsg/livewire/livewire.js', $handle);
@@ -53,4 +58,4 @@ Route::get('welcome',function(){
 });
 Route::get('/', MapComponent::class)->middleware('auth')->name('dashboard');
 
-Route::get('administrator', AdministratorComponent::class)->middleware('administrator')->name('administrator.index');
+

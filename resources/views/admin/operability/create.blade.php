@@ -28,7 +28,7 @@
             <button type="submit"
                 class="btn btn-primary m-2 w-100 w-md-50">{{ __('Guardar') }}</button>
 
-            <a href="{{ route('dashboard') }}" class="btn btn-secondary m-2 w-100 w-md-50">{{ __('Volver') }}</a>
+            <a href="{{ route('operability.index') }}" class="btn btn-secondary m-2 w-100 w-md-50">{{ __('Volver') }}</a>
         </div>
     </div>
 

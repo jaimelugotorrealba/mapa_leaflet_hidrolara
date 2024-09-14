@@ -26,9 +26,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('dashboard')}}" class="font-bold text-lg">{{__('Sitio Web')}}</a>
                 </li>
+                @if ((((isset(auth()->user()->userRole) && !is_null(auth()->user()->userRole) && auth()->user()->userRole->role->name !== 'Jefe'))) || (isset(auth()->user()->user_type_id) && auth()->user()->user_type_id == 1))
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('operability.index')}}" class="font-bold text-lg">{{__('Ubicaciones')}}</a>
                 </li>
+                @endif
+
             </ul>
         </nav>
     </div>

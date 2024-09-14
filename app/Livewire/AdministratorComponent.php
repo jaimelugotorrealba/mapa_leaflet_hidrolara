@@ -2,9 +2,12 @@
 
 namespace App\Livewire;
 
-use App\Models\Operability;
+use App\Models\Role;
+use App\Models\User;
 use Livewire\Component;
+use App\Models\UserRole;
 use App\Models\UserType;
+use App\Models\Operability;
 use Livewire\WithPagination;
 use Livewire\Attributes\Rule;
 use App\Models\User as UserModel;
@@ -14,7 +17,7 @@ class AdministratorComponent extends Component
 {
     use WithPagination;
 
-    public $edit, $userTypes, $password_confirmation;
+    public $edit, $userTypes, $password_confirmation,$roles;
 
     #[Rule(['required','unique:users'])]
     public $email ;
@@ -27,6 +30,7 @@ class AdministratorComponent extends Component
 
     public function mount(){
         $this->userTypes = UserType::all();
+        $this->roles = Role::all();
     }
     public function save(){
         if($this->edit){
@@ -35,18 +39,24 @@ class AdministratorComponent extends Component
                 'name' => ['required','min:7'],
                 'userType' => ['required']
             ]);
-            DB::table('users')->where('email', $this->email)->update(['name'=>$this->name,'user_type_id' => $this->userType]);
+            $user = User::where('email',$this->email)->first();
+            DB::table('users')->where('email', $this->email)->update(['name'=>$this->name,'user_type_id' => 2]);
+            DB::table('user_roles')->where('user_id',$user->id)->updateOrInsert(['user_id'=>$user->id],['role_id' => $this->userType]);
             session()->flash('message', 'Información guardada exitosamente');
             $this->reset('email','password','name','userType','password_confirmation');
             $this->edit = null;
             $this->mount();
         }else{
             $this->validate();
-            UserModel::create([
+            $user = UserModel::create([
                 'email' => $this->email,
                 'name' => $this->name,
                 'password' => bcrypt($this->password),
-                'user_type_id' => $this->userType
+                'user_type_id' => 2
+            ]);
+            UserRole::create([
+                'user_id'=>$user->id,
+                'role_id' => $this->userType
             ]);
             $this->reset('email','password','name','userType','password_confirmation');
             session()->flash('message', 'Información guardada exitosamente');
@@ -56,7 +66,7 @@ class AdministratorComponent extends Component
     public function editUser(UserModel $user){
         $this->email = $user->email;
         $this->name = $user->name;
-        $this->userType = $user->user_type_id;
+        $this->userType = isset($user->userRole) && !is_null($user->userRole) ? $user->userRole->role_id : $user->user_type_id;
         $this->edit = true;
     }
     public function cancel(){
@@ -72,12 +82,16 @@ class AdministratorComponent extends Component
         session()->flash('message-two-factor', 'Autenticación de dos pasos deshabilitada exitosamente');
         $this->cancel();
     }
-    public function userDelete(UserModel $user){
+
+
+    public function userDelete($id){
+        $user = User::find($id);
         $operability = Operability::where('user_id', $user->id)->first();
         if($operability){
             session()->flash('message-error',"No se puede eliminar al usuario $user->name");
             $this->cancel();
         }else{
+            UserRole::where('user_id',$user->id)->delete();
             $user->delete();
             session()->flash('message-success',"El usuario $user->name fue eliminado exitosamente");
             $this->cancel();
