@@ -11,7 +11,7 @@
 @section('content')
 <section class="container-fluid">
     <h1 class="block text-2xl font-semibold text-center mb-5">{{ __('Agregar ubicación') }}</h1>
-    <form method="POST" action="{{ ($operability) ? route('location.update',['operability' => $operability->id]) : route('location.store') }}"
+    <form method="POST" action="{{ ($operability) ? route('operability.update',['operability' => $operability->id]) : route('operability.store') }}"
         class="py-3 bg-white shadow rounded px-4 pt-6 pb-4 mb-4 ">
         @csrf
         <x-validation-errors />

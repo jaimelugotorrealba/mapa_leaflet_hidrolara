@@ -5,7 +5,7 @@ use App\Livewire\UbicationCreate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MapController;
 use App\Livewire\AdministratorComponent;
-use App\Http\Controllers\LocationController;
+use App\Http\Controllers\OperabilityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,11 +32,12 @@ route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function(){
     route::get('/',function(){
         return view('admin.index');
     })->name('admin.index');
-    Route::get('/locations', [LocationController::class, 'index'])->middleware('auth')->name('location.index');
-    Route::get('/locations/create', [LocationController::class, 'create'])->middleware('auth')->name('location.create');
-    Route::post('/locations/create', [LocationController::class, 'store'])->middleware('auth')->name('location.store');
-    Route::get('/locations/create/{operability}',[LocationController::class, 'edit'])->middleware('auth')->name('location.edit');
-    Route::post('/locations/create/{operability}',[LocationController::class, 'update'])->middleware('auth')->name('location.update');
+    Route::get('/operability', [OperabilityController::class, 'index'])->middleware('auth')->name('operability.index');
+    Route::get('/operability/create', [OperabilityController::class, 'create'])->middleware('auth')->name('operability.create');
+    Route::post('/operability/create', [OperabilityController::class, 'store'])->middleware('auth')->name('operability.store');
+    Route::get('/operability/create/{operability}',[OperabilityController::class, 'edit'])->middleware('auth')->name('operability.edit');
+    Route::post('/operability/create/{operability}',[OperabilityController::class, 'update'])->middleware('auth')->name('operability.update');
+    Route::post('/operability/delete/{operability}',[OperabilityController::class, 'destroy'])->middleware('auth')->name('operability.delete');
 });
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/scsg/livewire/livewire.js', $handle);

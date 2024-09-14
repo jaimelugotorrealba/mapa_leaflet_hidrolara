@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\OperabilityDataTable;
 use proj4php\Proj;
 use proj4php\Point;
 use proj4php\Proj4php;
@@ -10,17 +11,16 @@ use Illuminate\Http\Request;
 use App\Models\DescriptionOperability;
 use App\Models\OperabilityLog;
 
-class LocationController extends Controller
+class OperabilityController extends Controller
 {
-    public function index(){
-        $operabilities = Operability::all();
-        return view('admin.ubication.index',compact('operabilities'));
+    public function index(OperabilityDataTable $dataTable){
+        return $dataTable->render('admin.operability.index');
     }
 
     public function create()
     {
         $operability = null;
-        return view('admin.ubication.create')->with('operability', $operability);
+        return view('admin.operability.create')->with('operability', $operability);
     }
 
     public function store(Request $request){
@@ -68,11 +68,11 @@ class LocationController extends Controller
             'status' => $request['status'],
             'status_description' => $request['statusDescription']
         ]);
-        return redirect()->action([MapController::class,'index'])->with('successful-message', 'Ubicación guardada exitosamente');
+        return redirect()->action([OperabilityController::class,'index'])->with('successful-message', 'Ubicación guardada exitosamente');
     }
 
     public function edit(Operability $operability){
-        return view('admin.ubication.create')->with('operability',$operability);
+        return view('admin.operability.create')->with('operability',$operability);
     }
 
     public function update(Operability $operability, Request $request){
@@ -145,5 +145,10 @@ class LocationController extends Controller
         // Retornar el resultado
         $result = [$geographicPoint->y, $geographicPoint->x];
         return $result;
+    }
+
+    public function destroy(Operability $operability)
+    {
+        $operability->delete();
     }
 }

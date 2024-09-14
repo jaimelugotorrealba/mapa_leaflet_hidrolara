@@ -14,4 +14,9 @@ class Operability extends Model
     public function icon(){
         return $this->belongsTo(Icon::class);
     }
+
+    public function operabilityType()
+    {
+        return $this->belongsTo(OperabilityType::class, 'operability_type_id','id');
+    }
 }

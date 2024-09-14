@@ -148,7 +148,7 @@
                 {{ __('Inicio') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link class="text-xl font-semibold" href="{{ route('map.create') }}">
+            <x-responsive-nav-link class="text-xl font-semibold" href="{{ route('operability.create') }}">
                 {{ __('Crear ubicación') }}
             </x-responsive-nav-link>
 

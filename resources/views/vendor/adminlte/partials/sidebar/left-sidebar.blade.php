@@ -27,7 +27,7 @@
                     <a class="nav-link" href="{{route('dashboard')}}" class="font-bold text-lg">{{__('Sitio Web')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('location.index')}}" class="font-bold text-lg">{{__('Ubicaciones')}}</a>
+                    <a class="nav-link" href="{{route('operability.index')}}" class="font-bold text-lg">{{__('Ubicaciones')}}</a>
                 </li>
             </ul>
         </nav>

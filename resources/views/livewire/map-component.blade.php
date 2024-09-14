@@ -5,7 +5,7 @@
     <div class="flex">
         @if (isset(auth()->user()->userRole) && auth()->user()->userRole && (auth()->user()->userRole->role_id==1 || auth()->user()->userRole->role_id==2))
         <section class="hidden md:block md:w-2/5 p-3 ">
-            <a href="{{ route('map.create') }}"
+            <a href="{{ route('operability.create') }}"
             class="block m-6 mb-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center md:w-32">Crear</a>
             <h1 class="block py-3 font-semibold text-2xl text-center mt-3">Ubicaciones</h1>
             <form action="#">
@@ -29,7 +29,7 @@
                                     <td class="text-center py-2 align-middle uppercase">{{ $operability->details }}</td>
                                     <td class="text-center align-middle uppercase">{{ $operability->operability_type }}</td>
                                     <td class="gap-2 items-center align-middle">
-                                        <a href="{{ route('map.edit', ['operability' => $operability->id]) }}"
+                                        <a href="{{ route('operability.edit', ['operability' => $operability->id]) }}"
                                             type="button"
                                             class="bg-green-600 hover:bg-green-700 text-white font-bold py-1 rounded text-center md:w-10"><i
                                                 class="fas fa-edit"></i></a>
@@ -61,9 +61,9 @@
 
         </section>
         @endif
-     
 
-      
+
+
 
         <section id="sectionMap" class="w-full h-screen-4rem z-0" wire:ignore>
             <div id="map" class="h-full"></div>
