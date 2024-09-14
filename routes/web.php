@@ -33,9 +33,9 @@ route::group(['middleware' => ['auth','permission'], 'prefix' => 'admin'], funct
         return view('admin.index');
     })->name('admin.index');
     //operability
-        Route::get('/operability', [OperabilityController::class, 'index'])->middleware('administrator')->name('operability.index');
-        Route::get('/operability/create', [OperabilityController::class, 'create'])->middleware('administrator')->name('operability.create');
-        Route::post('/operability/create', [OperabilityController::class, 'store'])->middleware('administrator')->name('operability.store');
+        Route::get('/operability', [OperabilityController::class, 'index'])->middleware('auth')->name('operability.index');
+        Route::get('/operability/create', [OperabilityController::class, 'create'])->middleware('auth')->name('operability.create');
+        Route::post('/operability/create', [OperabilityController::class, 'store'])->middleware('auth')->name('operability.store');
         Route::get('/operability/create/{operability}',[OperabilityController::class, 'edit'])->middleware('administrator')->name('operability.edit');
         Route::post('/operability/create/{operability}',[OperabilityController::class, 'update'])->middleware('administrator')->name('operability.update');
         Route::post('/operability/delete/{operability}',[OperabilityController::class, 'destroy'])->middleware('administrator')->name('operability.delete');
