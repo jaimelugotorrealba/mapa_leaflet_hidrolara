@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -11,18 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('icons', function (Blueprint $table) {
-            //
-        });
+       DB::table('icons')->where('icon','<span class="material-symbols-outlined">water_pump</span>')->where('description','Tubería')->update(['description'=>'Bomba de agua']);
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::table('icons', function (Blueprint $table) {
-            //
-        });
-    }
+ 
 };
