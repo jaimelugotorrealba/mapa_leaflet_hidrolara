@@ -13,7 +13,7 @@
         <!--Normalize-->
         <link rel="stylesheet" href="{{asset('css/normalize.css')}}">
         <!-- Scripts -->
-        <link rel="stylesheet" href="{{asset('build/assets/app-e2f85f26.css')}}">
+        <link rel="stylesheet" href="{{asset('build/assets/app-3a3b1988.css')}}">
         <script src="{{asset('build/assets/app-dbe23e4c.js')}}"></script>
         <!-- Styles -->
         @livewireStyles
