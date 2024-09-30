@@ -20,11 +20,13 @@
                 @endif>
                 {{-- Configured sidebar links --}}
                 {{-- @each('adminlte::partials.sidebar.menu-item', $adminlte->menu('sidebar'), 'item') --}}
+                @if ((((isset(auth()->user()->userRole) && !is_null(auth()->user()->userRole) && auth()->user()->userRole->role->name == 'Administrador'))) || (isset(auth()->user()->user_type_id) && auth()->user()->user_type_id == 1))
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('administrator.index')}}" class="font-bold text-lg">{{__('Administrador')}}</a>
+                    <a class="nav-link" href="{{route('administrator.index')}}" class="font-bold text-lg"><i class="fas fa-users-cog mr-1"></i>{{__('Administrador')}}</a>
                 </li>
+                @endif
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('dashboard')}}" class="font-bold text-lg">{{__('Sitio Web')}}</a>
+                    <a class="nav-link" href="{{route('dashboard')}}" class="font-bold text-lg"><i class="fas fa-globe mr-1"></i>{{__('Sitio Web')}}</a>
                 </li>
                 {{-- @if ((((isset(auth()->user()->userRole) && !is_null(auth()->user()->userRole) && auth()->user()->userRole->role->name !== 'Jefe'))) || (isset(auth()->user()->user_type_id) && auth()->user()->user_type_id == 1))
                 <li class="nav-item">
@@ -33,7 +35,11 @@
                 @endif --}}
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('operability.index')}}" class="font-bold text-lg">{{__('Ubicaciones')}}</a>
+                    <a class="nav-link" href="{{route('operability.index')}}" class="font-bold text-lg"><i class="fas fa-tasks mr-1"></i>{{__('Operabilidad')}}</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('binnacles.index')}}" class="font-bold text-lg"><i class="fas fa-stream mr-1"></i>{{__('Bitácora')}}</a>
                 </li>
 
             </ul>

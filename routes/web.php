@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BinnacleController;
 use App\Livewire\MapComponent;
 use App\Livewire\UbicationCreate;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,11 @@ route::group(['middleware' => ['auth','permission'], 'prefix' => 'admin'], funct
     Route::get('administrator', function(){
         return view('admin.users.index');
     })->middleware('administrator')->name('administrator.index');
+
+    Route::get('binnacles',[BinnacleController::class,'index'])->name('binnacles.index');
+    Route::get('binnacles/{operability}',[BinnacleController::class,'edit'])->name('binnacles.edit');
+    Route::put('binnacles/{operability}',[BinnacleController::class,'update'])->name('binnacles.update');
+
 });
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/scsg/livewire/livewire.js', $handle);

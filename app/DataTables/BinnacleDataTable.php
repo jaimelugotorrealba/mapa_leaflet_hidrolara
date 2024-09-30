@@ -2,7 +2,6 @@
 
 namespace App\DataTables;
 
-use App\Models\Location;
 use App\Models\Operability;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -13,7 +12,7 @@ use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
-class OperabilityDataTable extends DataTable
+class BinnacleDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -35,22 +34,17 @@ class OperabilityDataTable extends DataTable
             ->addColumn('status', function ($row) {
                 return $row->operabilityType->description;
             })
+            ->addColumn('status_description', function ($row) {
+                return $row->status_description;
+            })
             ->addColumn('action', function ($row) {
                 $action = '<div class="d-flex justify-content-around">';
-                $action .= '  <a href="' . route('operability.edit', ['operability' => $row->id]) . '"
-            type="button"
-            class="btn btn-success text-white font-weight-bold py-1 rounded text-center"><i
-                class="fas fa-edit"></i></a>';
-
-                if (auth()->user()->user_type_id === 1) {
-                    $action .='<form action="'.route('operability.delete',$row->id).'" method="POST"><input type="hidden" name="_token" value="'.csrf_token().'" />';
-                    $action .= '<button type="button" class="btn btn-danger text-white py-1 rounded text-center ml-2 delete-btn" data-id="'.$row->id.'">
-                            <i class="fas fa-trash"></i>
-                        </button></form>';
-            $action.='</div>';
-        return $action;
-                }
-            })->rawColumns(['id', 'code', 'name', 'status','action']);
+                $action .= '  <a href="' . route('binnacles.edit', ['operability' => $row->id]) . '"
+        type="button"
+        class="btn btn-success text-white font-weight-bold py-1 rounded text-center"><i
+            class="fas fa-edit"></i></a></div>';
+                return $action;
+            })->rawColumns(['id', 'code', 'name', 'status','status_description', 'action']);
     }
 
     /**
@@ -67,7 +61,7 @@ class OperabilityDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('operability-table')
+            ->setTableId('binnacle-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
@@ -116,6 +110,7 @@ class OperabilityDataTable extends DataTable
             __('code') => ['data' => 'code', 'exportable' => false, 'name' => 'code', 'title' => __('Codigo')],
             __('details') => ['data' => 'details', 'exportable' => false, 'name' => 'details', 'title' => __('Nombre')],
             __('status') => ['data' => 'status', 'exportable' => false, 'name' => 'status', 'title' => __('Estado')],
+            __('status_description') => ['data' => 'status_description', 'exportable' => false, 'name' => 'status_description', 'title' => __('Descripción')],
             Column::computed('action',__('Acción'))
                 ->exportable(false)
                 ->printable(false)

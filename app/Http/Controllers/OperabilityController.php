@@ -115,12 +115,12 @@ class OperabilityController extends Controller
         $operability->save();
 
           //bitacora
-          OperabilityLog::create([
-            'user_id' => auth()->user()->id,
-            'status' => $request['status'],
-            'status_description' => $request['statusDescription']
-        ]);
-        return redirect()->route('dashboard');
+        //   OperabilityLog::create([
+        //     'user_id' => auth()->user()->id,
+        //     'status' => $request['status'],
+        //     'status_description' => $request['statusDescription']
+        // ]);
+        return redirect()->action([OperabilityController::class,'index'])->with('successful-message', 'Ubicación guardada exitosamente');
     }
 
     private function convert($utmRequest)
