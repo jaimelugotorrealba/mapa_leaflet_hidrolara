@@ -94,7 +94,6 @@ class OperabilityController extends Controller
         ]);
         $utm = [$request['utm_x'],$request['utm_y'],$request['zone']];
         $resultConvert = $this->convert($utm);
-
         $operability->operability_type_id = $request['status'];
         $operability->icon_id = $request['icons'];
         $operability->details = $request['details'];
@@ -144,6 +143,30 @@ class OperabilityController extends Controller
 
         // Retornar el resultado
         $result = [$geographicPoint->y, $geographicPoint->x];
+        return $result;
+    }
+
+    private function convertToUtm($geoRequest)
+    {
+        $latitude = $geoRequest[0];
+        $longitude = $geoRequest[1];
+
+        // Crear una instancia de Proj4php
+        $proj4 = new Proj4php();
+
+        // Definir proyecciones geográficas y UTM
+        $wgs84 = new Proj('EPSG:4326', $proj4); // WGS84
+        $zone = floor(($longitude + 180) / 6) + 1; // Calcular la zona UTM
+        $utm = new Proj('EPSG:326' . str_pad($zone, 2, '0', STR_PAD_LEFT), $proj4); // UTM zona norte
+
+        // Crear el punto geográfico
+        $point = new Point($longitude, $latitude);
+
+        // Transformar las coordenadas geográficas a UTM
+        $utmPoint = $proj4->transform($wgs84, $utm, $point);
+
+        // Retornar el resultado
+        $result = [$utmPoint->x, $utmPoint->y, $zone]; // Retorna las coordenadas UTM y la zona
         return $result;
     }
 

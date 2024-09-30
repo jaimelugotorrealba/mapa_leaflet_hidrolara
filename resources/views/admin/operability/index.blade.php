@@ -14,8 +14,11 @@
         <a href="{{ route('operability.create') }}"
         class="btn btn-primary m-6 mb-0 text-white font-weight-bold py-2 px-4 rounded text-center w-100">Crear</a>
        </div>
-        <div class="card">
-        </div>
+       @if (session('successful-message'))
+       <div class="alert alert-success mt-3">
+           <p class="text-center font-weight-bold mb-0">{{ session('successful-message') }}</p>
+       </div>
+   @endif
         <div class="card-body">
             {{ $dataTable->table(['class' => 'table table-striped table-bordered']) }}
         </div>

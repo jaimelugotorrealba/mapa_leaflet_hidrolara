@@ -35,6 +35,6 @@ class BinnacleController extends Controller
             'status' => $request['status'],
             'status_description' => $request['statusDescription']
         ]);
-        return redirect()->route('binnacles.index')->with('successful-message', 'Ubicación guardada exitosamente');;
+        return redirect()->route('binnacles.index')->with('successful-message', 'Registro guardado exitosamente');;
     }
 }
